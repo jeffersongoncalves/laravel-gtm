@@ -26,7 +26,7 @@ You can install the package via composer:
 composer require jeffersongoncalves/laravel-gtm
 ```
 
-Run the migrations to create the settings table (if you haven't already) and seed the GTM settings:
+Run the migrations to create the settings table and seed the GTM settings:
 
 ```bash
 php artisan migrate
@@ -36,53 +36,24 @@ php artisan migrate
 
 ### Setting your GTM ID
 
-There are multiple ways to configure your GTM ID:
+The GTM ID is stored in the database via `spatie/laravel-settings`. Configure it at runtime using any of the following approaches:
 
-#### Option 1: Environment variable (recommended for initial setup)
-
-Add your GTM ID to the `.env` file:
-
-```env
-GTM_ID=GTM-XXXXXX
-```
-
-When you run `php artisan migrate`, the value from `GTM_ID` will be automatically seeded into the database settings.
-
-#### Option 2: Database (runtime)
-
-You can change the GTM ID at runtime via code — useful for admin panels, multi-tenant apps, or any dynamic scenario:
+#### Via dependency injection
 
 ```php
 use JeffersonGoncalves\Gtm\Settings\GtmSettings;
 
-// Using dependency injection
 $settings = app(GtmSettings::class);
-$settings->gtm_id = 'GTM-YYYYYY';
+$settings->gtm_id = 'GTM-XXXXXX';
 $settings->save();
 ```
 
-#### Option 3: Helper function
+#### Via helper function
 
 ```php
 $settings = gtm_settings();
-$settings->gtm_id = 'GTM-YYYYYY';
+$settings->gtm_id = 'GTM-XXXXXX';
 $settings->save();
-```
-
-#### Option 4: Facade
-
-```php
-use JeffersonGoncalves\Gtm\Facades\Gtm;
-
-$gtmId = Gtm::gtm_id;
-```
-
-### Publishing the config file (optional)
-
-The `config/gtm.php` file serves as the seed source for the settings migration. You only need to publish it if you want to customize the default value:
-
-```bash
-php artisan vendor:publish --tag=gtm-config
 ```
 
 ### Publishing the settings migration (optional)
@@ -127,20 +98,6 @@ $settings = gtm_settings();
 $settings->gtm_id = 'GTM-NEWID';
 $settings->save();
 ```
-
-## Upgrading from 1.0
-
-If you are upgrading from version 1.0 (config-only):
-
-1. Update the package: `composer update jeffersongoncalves/laravel-gtm`
-2. Run migrations: `php artisan migrate`
-   - Your existing `GTM_ID` from `.env` will be automatically migrated to the database
-3. If you previously published the views, re-publish them:
-   ```bash
-   php artisan vendor:publish --tag=gtm-views --force
-   ```
-
-The `config/gtm.php` file and `GTM_ID` env variable are still used as the seed source during migration, so no configuration changes are needed.
 
 ## Testing
 

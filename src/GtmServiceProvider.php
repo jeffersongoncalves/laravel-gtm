@@ -12,7 +12,6 @@ class GtmServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package->name('laravel-gtm')
-            ->hasConfigFile('gtm')
             ->hasViews();
     }
 

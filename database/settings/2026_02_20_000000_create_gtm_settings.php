@@ -6,6 +6,6 @@ return new class extends SettingsMigration
 {
     public function up(): void
     {
-        $this->migrator->add('gtm.gtm_id', config('gtm.gtm_id', env('GTM_ID', '')));
+        $this->migrator->add('gtm.gtm_id', '');
     }
 };
