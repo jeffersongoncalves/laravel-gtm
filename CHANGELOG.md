@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.0 - 2026-02-20
+
+### Breaking Changes
+
+- Removed `config/gtm.php` and `GTM_ID` environment variable support
+- GTM ID is now configured exclusively via database using `spatie/laravel-settings`
+
+### Migration from 1.x
+
+Run `php artisan migrate` to create the settings table, then set your GTM ID at runtime:
+
+```php
+$settings = gtm_settings();
+$settings->gtm_id = 'GTM-XXXXXX';
+$settings->save();
+
+```
 ## 1.1.0 - 2026-02-20
 
 ### What's New
