@@ -18,10 +18,12 @@
     "require": {
         "php": "^8.2|^8.3",
         "laravel/framework": "^11.0|^12.0",
-        "spatie/laravel-package-tools": "^1.14.0"
+        "spatie/laravel-package-tools": "^1.14.0",
+        "spatie/laravel-settings": "^3.0"
     },
     "require-dev": {
         "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.27",
         "orchestra/testbench": "^9.0|^10.0",
         "pestphp/pest": "^3.7.4",
         "pestphp/pest-plugin-laravel": "^3.0"
@@ -29,6 +31,14 @@
     "autoload": {
         "psr-4": {
             "JeffersonGoncalves\\Gtm\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JeffersonGoncalves\\Gtm\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -49,7 +59,10 @@
         "laravel": {
             "providers": [
                 "JeffersonGoncalves\\Gtm\\GtmServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Gtm": "JeffersonGoncalves\\Gtm\\Facades\\Gtm"
+            }
         }
     },
     "minimum-stability": "dev",
