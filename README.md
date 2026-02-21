@@ -12,6 +12,12 @@
 
 This plugin seamlessly integrates Google Tag Manager (GTM) into your website, enabling streamlined management and deployment of marketing tags, analytics, and tracking pixels. With easy-to-implement script inclusion and customizable options, it simplifies the process of monitoring user interactions and gathering valuable insights without altering your site's core code. Perfect for marketers and developers looking to enhance their tracking capabilities with minimal effort.
 
+## Requirements
+
+- PHP 8.2+
+- Laravel 11.0+
+- `spatie/laravel-settings` ^3.0 (installed automatically)
+
 ## Installation
 
 You can install the package via composer:
@@ -20,25 +26,121 @@ You can install the package via composer:
 composer require jeffersongoncalves/laravel-gtm
 ```
 
-## Usage
+Run the migrations to create the settings table (if you haven't already) and seed the GTM settings:
 
-Publish config file.
+```bash
+php artisan migrate
+```
+
+## Configuration
+
+### Setting your GTM ID
+
+There are multiple ways to configure your GTM ID:
+
+#### Option 1: Environment variable (recommended for initial setup)
+
+Add your GTM ID to the `.env` file:
+
+```env
+GTM_ID=GTM-XXXXXX
+```
+
+When you run `php artisan migrate`, the value from `GTM_ID` will be automatically seeded into the database settings.
+
+#### Option 2: Database (runtime)
+
+You can change the GTM ID at runtime via code — useful for admin panels, multi-tenant apps, or any dynamic scenario:
+
+```php
+use JeffersonGoncalves\Gtm\Settings\GtmSettings;
+
+// Using dependency injection
+$settings = app(GtmSettings::class);
+$settings->gtm_id = 'GTM-YYYYYY';
+$settings->save();
+```
+
+#### Option 3: Helper function
+
+```php
+$settings = gtm_settings();
+$settings->gtm_id = 'GTM-YYYYYY';
+$settings->save();
+```
+
+#### Option 4: Facade
+
+```php
+use JeffersonGoncalves\Gtm\Facades\Gtm;
+
+$gtmId = Gtm::gtm_id;
+```
+
+### Publishing the config file (optional)
+
+The `config/gtm.php` file serves as the seed source for the settings migration. You only need to publish it if you want to customize the default value:
 
 ```bash
 php artisan vendor:publish --tag=gtm-config
 ```
 
-Add start head template.
+### Publishing the settings migration (optional)
+
+If you need to customize the settings migration:
+
+```bash
+php artisan vendor:publish --tag=gtm-settings-migrations
+```
+
+## Usage
+
+Add the GTM head script inside your `<head>` tag, as high as possible:
 
 ```php
 @include('gtm::head')
 ```
 
-Add start body template.
+Add the GTM body noscript immediately after the opening `<body>` tag:
 
 ```php
 @include('gtm::body')
 ```
+
+### Reading the current GTM ID
+
+```php
+// Via helper
+$gtmId = gtm_settings()->gtm_id;
+
+// Via container
+$gtmId = app(\JeffersonGoncalves\Gtm\Settings\GtmSettings::class)->gtm_id;
+
+// Via Facade
+$gtmId = \JeffersonGoncalves\Gtm\Facades\Gtm::gtm_id;
+```
+
+### Updating the GTM ID at runtime
+
+```php
+$settings = gtm_settings();
+$settings->gtm_id = 'GTM-NEWID';
+$settings->save();
+```
+
+## Upgrading from 1.0
+
+If you are upgrading from version 1.0 (config-only):
+
+1. Update the package: `composer update jeffersongoncalves/laravel-gtm`
+2. Run migrations: `php artisan migrate`
+   - Your existing `GTM_ID` from `.env` will be automatically migrated to the database
+3. If you previously published the views, re-publish them:
+   ```bash
+   php artisan vendor:publish --tag=gtm-views --force
+   ```
+
+The `config/gtm.php` file and `GTM_ID` env variable are still used as the seed source during migration, so no configuration changes are needed.
 
 ## Testing
 
