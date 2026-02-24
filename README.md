@@ -1,6 +1,6 @@
 <div class="filament-hidden">
 
-![Laravel Google Tag Manager](https://raw.githubusercontent.com/jeffersongoncalves/laravel-gtm/master/art/jeffersongoncalves-laravel-gtm.png)
+![Laravel Gtm](https://raw.githubusercontent.com/jeffersongoncalves/laravel-gtm/master/art/jeffersongoncalves-laravel-gtm.png)
 
 </div>
 
