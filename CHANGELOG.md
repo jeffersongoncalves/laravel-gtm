@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.1 - 2026-02-24
+
+### What's Changed
+
+- Add Laravel 13.x support in composer.json
+- Add orchestra/testbench ^11.0 for Laravel 13 testing
+
 ## 2.0.0 - 2026-02-20
 
 ### Breaking Changes
@@ -17,6 +24,7 @@ Run `php artisan migrate` to create the settings table, then set your GTM ID at 
 $settings = gtm_settings();
 $settings->gtm_id = 'GTM-XXXXXX';
 $settings->save();
+
 
 ```
 ## 1.1.0 - 2026-02-20
