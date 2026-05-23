@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.2 - 2026-04-26
+
+### What's Changed
+
+* build(deps): bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/jeffersongoncalves/laravel-gtm/pull/11
+* build(deps): bump dependabot/fetch-metadata from 2.5.0 to 3.0.0 by @dependabot[bot] in https://github.com/jeffersongoncalves/laravel-gtm/pull/12
+
+**Full Changelog**: https://github.com/jeffersongoncalves/laravel-gtm/compare/2.0.1...2.0.2
+
 ## 2.0.1 - 2026-02-24
 
 ### What's Changed
@@ -24,6 +33,7 @@ Run `php artisan migrate` to create the settings table, then set your GTM ID at 
 $settings = gtm_settings();
 $settings->gtm_id = 'GTM-XXXXXX';
 $settings->save();
+
 
 
 ```
