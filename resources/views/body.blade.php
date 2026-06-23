@@ -1,9 +1,9 @@
 @php
-    $gtmId = app(\JeffersonGoncalves\Gtm\Settings\GtmSettings::class)->gtm_id;
+    $settings = gtm_settings();
 @endphp
-@if(!empty($gtmId))
+@if($settings->hasValidId())
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ $gtmId }}"
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ urlencode($settings->gtm_id) }}"
                       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 @endif

@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Facade;
 use JeffersonGoncalves\Gtm\Settings\GtmSettings;
 
 /**
- * @see \JeffersonGoncalves\Gtm\Settings\GtmSettings
+ * @property string $gtm_id
+ *
+ * @see GtmSettings
  */
 class Gtm extends Facade
 {

@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\Gtm;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use JeffersonGoncalves\Gtm\Settings\GtmSettings;
 use Spatie\LaravelPackageTools\Package;
@@ -39,5 +40,8 @@ class GtmServiceProvider extends PackageServiceProvider
         $this->publishes([
             $migrationsPath => database_path('settings'),
         ], 'gtm-settings-migrations');
+
+        Blade::directive('gtmHead', fn () => "<?php echo view('gtm::head')->render(); ?>");
+        Blade::directive('gtmBody', fn () => "<?php echo view('gtm::body')->render(); ?>");
     }
 }

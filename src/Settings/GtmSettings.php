@@ -12,4 +12,9 @@ class GtmSettings extends Settings
     {
         return 'gtm';
     }
+
+    public function hasValidId(): bool
+    {
+        return preg_match('/^GTM-[A-Z0-9]+$/', $this->gtm_id) === 1;
+    }
 }

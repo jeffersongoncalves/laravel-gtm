@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Blade;
+use JeffersonGoncalves\Gtm\Facades\Gtm;
 use JeffersonGoncalves\Gtm\Settings\GtmSettings;
 
 it('can resolve GtmSettings from the container', function () {
@@ -67,6 +69,53 @@ it('does not render body view when gtm_id is empty', function () {
     expect($view)->not->toContain('googletagmanager.com');
 });
 
+it('validates the gtm_id format', function () {
+    $settings = app(GtmSettings::class);
+
+    $settings->gtm_id = 'GTM-VALID123';
+    expect($settings->hasValidId())->toBeTrue();
+
+    $settings->gtm_id = 'INVALID';
+    expect($settings->hasValidId())->toBeFalse();
+
+    $settings->gtm_id = '';
+    expect($settings->hasValidId())->toBeFalse();
+});
+
+it('does not render head view when gtm_id is invalid', function () {
+    $settings = app(GtmSettings::class);
+    $settings->gtm_id = 'INVALID';
+    $settings->save();
+
+    $view = view('gtm::head')->render();
+
+    expect($view)->not->toContain('googletagmanager.com');
+});
+
+it('renders the @gtmHead directive', function () {
+    $settings = app(GtmSettings::class);
+    $settings->gtm_id = 'GTM-DIRECTIVE';
+    $settings->save();
+
+    $output = Blade::render('@gtmHead');
+
+    expect($output)
+        ->toContain('GTM-DIRECTIVE')
+        ->toContain('googletagmanager.com/gtm.js');
+});
+
+it('renders the @gtmBody directive', function () {
+    $settings = app(GtmSettings::class);
+    $settings->gtm_id = 'GTM-DIRECTIVE';
+    $settings->save();
+
+    $output = Blade::render('@gtmBody');
+
+    expect($output)
+        ->toContain('GTM-DIRECTIVE')
+        ->toContain('googletagmanager.com/ns.html');
+});
+
 it('provides gtm_settings helper function', function () {
     $settings = gtm_settings();
 
@@ -74,7 +123,7 @@ it('provides gtm_settings helper function', function () {
 });
 
 it('provides Gtm facade', function () {
-    $facade = JeffersonGoncalves\Gtm\Facades\Gtm::getFacadeRoot();
+    $facade = Gtm::getFacadeRoot();
 
     expect($facade)->toBeInstanceOf(GtmSettings::class);
 });

@@ -2,6 +2,7 @@
 
 namespace JeffersonGoncalves\Gtm\Tests;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use JeffersonGoncalves\Gtm\GtmServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -54,7 +55,7 @@ class TestCase extends Orchestra
 
     protected function seedSettings(string $gtmId = ''): void
     {
-        \Illuminate\Support\Facades\DB::table('settings')->updateOrInsert(
+        DB::table('settings')->updateOrInsert(
             ['group' => 'gtm', 'name' => 'gtm_id'],
             ['payload' => json_encode($gtmId), 'locked' => false, 'created_at' => now(), 'updated_at' => now()]
         );

@@ -68,15 +68,21 @@ php artisan vendor:publish --tag=gtm-settings-migrations
 
 Add the GTM head script inside your `<head>` tag, as high as possible:
 
-```php
+```blade
 @include('gtm::head')
+{{-- or use the Blade directive --}}
+@gtmHead
 ```
 
 Add the GTM body noscript immediately after the opening `<body>` tag:
 
-```php
+```blade
 @include('gtm::body')
+{{-- or use the Blade directive --}}
+@gtmBody
 ```
+
+> The scripts are only rendered when a valid GTM ID is configured. A valid ID matches the pattern `GTM-XXXXXXX` (uppercase letters and digits).
 
 ### Reading the current GTM ID
 
@@ -87,8 +93,8 @@ $gtmId = gtm_settings()->gtm_id;
 // Via container
 $gtmId = app(\JeffersonGoncalves\Gtm\Settings\GtmSettings::class)->gtm_id;
 
-// Via Facade
-$gtmId = \JeffersonGoncalves\Gtm\Facades\Gtm::gtm_id;
+// Via Facade (resolve the underlying settings instance first)
+$gtmId = \JeffersonGoncalves\Gtm\Facades\Gtm::getFacadeRoot()->gtm_id;
 ```
 
 ### Updating the GTM ID at runtime
