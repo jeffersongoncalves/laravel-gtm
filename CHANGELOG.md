@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.4 - 2026-08-01
+
+### What's Changed
+
+* build(deps): bump actions/checkout from 6 to 7 by @dependabot[bot] in https://github.com/jeffersongoncalves/laravel-gtm/pull/13
+* build(deps): bump actions/checkout from 6 to 7 by @dependabot[bot] in https://github.com/jeffersongoncalves/laravel-gtm/pull/14
+
+**Full Changelog**: https://github.com/jeffersongoncalves/laravel-gtm/compare/2.0.3...2.0.4
+
 ## 2.0.3 - 2026-05-23
 
 **Full Changelog**: https://github.com/jeffersongoncalves/laravel-gtm/compare/2.0.2...2.0.3
@@ -37,6 +46,7 @@ Run `php artisan migrate` to create the settings table, then set your GTM ID at 
 $settings = gtm_settings();
 $settings->gtm_id = 'GTM-XXXXXX';
 $settings->save();
+
 
 
 
