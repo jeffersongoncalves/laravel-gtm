@@ -1,6 +1,6 @@
 <div class="filament-hidden">
 
-![Laravel Gtm](https://raw.githubusercontent.com/jeffersongoncalves/laravel-gtm/master/art/jeffersongoncalves-laravel-gtm.png)
+![Laravel Gtm](https://raw.githubusercontent.com/jeffersongoncalves/laravel-gtm/main/art/jeffersongoncalves-laravel-gtm.png)
 
 </div>
 
@@ -9,7 +9,7 @@
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-FFDD00?style=flat-square&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/jeffersongoncalves)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jeffersongoncalves/laravel-gtm.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/laravel-gtm)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jeffersongoncalves/laravel-gtm/fix-php-code-style-issues.yml?branch=master&label=code%20style&style=flat-square)](https://github.com/jeffersongoncalves/laravel-gtm/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amaster)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jeffersongoncalves/laravel-gtm/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/jeffersongoncalves/laravel-gtm/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/jeffersongoncalves/laravel-gtm.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/laravel-gtm)
 
 This plugin seamlessly integrates Google Tag Manager (GTM) into your website, enabling streamlined management and deployment of marketing tags, analytics, and tracking pixels. With easy-to-implement script inclusion and customizable options, it simplifies the process of monitoring user interactions and gathering valuable insights without altering your site's core code. Perfect for marketers and developers looking to enhance their tracking capabilities with minimal effort.
