@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.1.0 - 2026-10-09
+
+Scripts carry the CSP nonce when the app sets one (Laravel's `Vite::cspNonce()`, e.g. through laravel-security-headers 2.1), so a policy can allow them with `'nonce-{nonce}'` instead of `'unsafe-inline'`. Nothing changes for apps without a nonce. The GTM snippet also forwards the nonce to the gtm.js tag it creates.
+
 ## 3.0.0 - 2026-08-01
 
 ### Security
@@ -57,6 +61,7 @@ Run `php artisan migrate` to create the settings table, then set your GTM ID at 
 $settings = gtm_settings();
 $settings->gtm_id = 'GTM-XXXXXX';
 $settings->save();
+
 
 
 
