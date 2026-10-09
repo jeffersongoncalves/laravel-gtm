@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Vite;
 use JeffersonGoncalves\Gtm\Facades\Gtm;
 use JeffersonGoncalves\Gtm\Settings\GtmSettings;
 
@@ -126,4 +127,24 @@ it('provides Gtm facade', function () {
     $facade = Gtm::getFacadeRoot();
 
     expect($facade)->toBeInstanceOf(GtmSettings::class);
+});
+
+it('adds the CSP nonce to the snippet and forwards it to gtm.js when the app sets one', function () {
+    $settings = app(GtmSettings::class);
+    $settings->gtm_id = 'GTM-NONCE';
+    $settings->save();
+
+    Vite::useCspNonce('abc123');
+
+    expect(view('gtm::head')->render())
+        ->toContain('nonce="abc123"')
+        ->toContain("setAttribute('nonce'");
+});
+
+it('renders no nonce attribute when the app uses none', function () {
+    $settings = app(GtmSettings::class);
+    $settings->gtm_id = 'GTM-NONCE';
+    $settings->save();
+
+    expect(view('gtm::head')->render())->not->toContain('nonce="');
 });
