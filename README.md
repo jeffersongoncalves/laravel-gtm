@@ -107,6 +107,15 @@ $settings->gtm_id = 'GTM-NEWID';
 $settings->save();
 ```
 
+## Google Consent Mode v2
+
+For EEA/UK visitors Google requires [Consent Mode v2](https://developers.google.com/tag-platform/security/guides/consent). [laravel-cookie-consent](https://github.com/jeffersongoncalves/laravel-cookie-consent) (4.2+) sends the consent signals: turn on its `consent_mode` setting and include its head view **before** this package's snippet, so the tags start with the right consent state:
+
+```blade
+@include('cookie-consent::cookie-consent-head')
+@include('gtm::head')
+```
+
 ## Testing
 
 ```bash
