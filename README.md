@@ -116,6 +116,10 @@ For EEA/UK visitors Google requires [Consent Mode v2](https://developers.google.
 @include('gtm::head')
 ```
 
+## Cookie consent
+
+With [laravel-cookie-consent](https://github.com/jeffersongoncalves/laravel-cookie-consent) installed and its `block_scripts` setting on, the script waits until the visitor allows the `marketing` category (change it with `script_categories`). When Consent Mode (`consent_mode`) is on, the tag loads right away and follows the consent signals instead. Nothing changes without it: this package does not require laravel-cookie-consent.
+
 ## Testing
 
 ```bash
