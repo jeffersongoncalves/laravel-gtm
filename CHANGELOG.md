@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.2.0 - 2026-11-17
+
+### Cookie consent
+
+With [laravel-cookie-consent](https://github.com/jeffersongoncalves/laravel-cookie-consent) 4.6+ installed and `block_scripts` on, the scripts wait until the visitor allows their cookie category (rendered as `type="text/plain" data-category="…"`, run with their CSP nonce once allowed). Nothing changes without it: this package still does not require laravel-cookie-consent.
+
 ## 3.1.0 - 2026-10-09
 
 Scripts carry the CSP nonce when the app sets one (Laravel's `Vite::cspNonce()`, e.g. through laravel-security-headers 2.1), so a policy can allow them with `'nonce-{nonce}'` instead of `'unsafe-inline'`. Nothing changes for apps without a nonce. The GTM snippet also forwards the nonce to the gtm.js tag it creates.
@@ -61,6 +67,7 @@ Run `php artisan migrate` to create the settings table, then set your GTM ID at 
 $settings = gtm_settings();
 $settings->gtm_id = 'GTM-XXXXXX';
 $settings->save();
+
 
 
 
